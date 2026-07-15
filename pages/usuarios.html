@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmaStock | Usuarios</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="sidebar-icon">⚕️</span>
+                <span>FarmaStock</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span class="icon">🏠</span><span>Inicio</span></a>
+                <a href="medicamentos.html" class="nav-item"><span class="icon">💊</span><span>Medicamentos</span></a>
+                <a href="ventas.html" class="nav-item"><span class="icon">🛒</span><span>Ventas</span></a>
+                <a href="compras.html" class="nav-item"><span class="icon">📥</span><span>Compras</span></a>
+                <a href="inventario.html" class="nav-item"><span class="icon">📦</span><span>Inventario</span></a>
+                <a href="usuarios.html" class="nav-item active"><span class="icon">👥</span><span>Usuarios</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="themeToggle" class="btn-theme">🌙 Modo oscuro</button>
+                <button id="logoutBtn" class="btn-logout">Cerrar sesión</button>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="topbar">
+                <div class="search-box">
+                    <input id="userSearch" type="search" placeholder="Buscar por nombres, apellidos, DNI, correo, usuario, rol o estado...">
+                </div>
+                <div class="topbar-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">FS</div>
+                        <div class="user-info">
+                            <div style="display:flex;align-items:center;gap:0.6rem;">
+                                <strong id="userName">Usuario</strong>
+                                <div id="userClock" class="clock" aria-live="polite">--:--:--</div>
+                            </div>
+                            <small id="userRole">Rol</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="dashboard-content">
+                <div class="actions-bar">
+                    <button id="btnNewUser" class="btn-action btn-primary">➕ Nuevo Usuario</button>
+                    <select id="userFilterRole">
+                        <option value="">Todos los roles</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="farmaceutico">Farmacéutico</option>
+                    </select>
+                    <select id="userFilterStatus">
+                        <option value="">Todos los estados</option>
+                        <option value="activo">Activos</option>
+                        <option value="inactivo">Inactivos</option>
+                    </select>
+                    <button id="btnExportExcel" class="btn-action">Exportar Excel</button>
+                </div>
+
+                <div class="table-panel">
+                    <div class="table-header">
+                        <h2>Usuarios del sistema</h2>
+                        <span>Gestión de usuarios y accesos</span>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Foto</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>DNI</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Usuario</th>
+                                    <th>Rol</th>
+                                    <th>Estado</th>
+                                    <th>Registro</th>
+                                    <th>Último acceso</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="userModal" class="modal" style="display:none;">
+                    <div class="modal-content" style="max-width: 900px;">
+                        <h3 id="userModalTitle">Nuevo Usuario</h3>
+                        <form id="userForm">
+                            <input type="hidden" id="userId">
+                            <div class="form-row">
+                                <label>Foto</label><input id="userPhoto" placeholder="URL de foto (opcional)">
+                                <label>Nombres</label><input id="userNombres" required>
+                            </div>
+                            <div class="form-row">
+                                <label>Apellidos</label><input id="userApellidos" required>
+                                <label>DNI</label><input id="userDni" required>
+                            </div>
+                            <div class="form-row">
+                                <label>Fecha Nacimiento</label><input id="userBirth" type="date">
+                                <label>Sexo</label><input id="userSexo">
+                            </div>
+                            <div class="form-row">
+                                <label>Dirección</label><input id="userDireccion">
+                                <label>Teléfono</label><input id="userTelefono">
+                            </div>
+                            <div class="form-row">
+                                <label>Correo</label><input id="userEmail" type="email" required>
+                                <label>Usuario</label><input id="userUsername" required>
+                            </div>
+                            <div class="form-row">
+                                <label>Contraseña</label><input id="userPassword" type="password">
+                                <label>Confirmar</label><input id="userConfirmPassword" type="password">
+                            </div>
+                            <div class="form-row">
+                                <label>Rol</label>
+                                <select id="userRoleSelect">
+                                    <option value="administrador">Administrador</option>
+                                    <option value="farmaceutico">Farmacéutico</option>
+                                </select>
+                                <label>Estado</label>
+                                <select id="userStatusSelect">
+                                    <option value="activo">Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit">Guardar</button>
+                                <button type="button" id="cancelUserBtn">Cancelar</button>
+                            </div>
+                            <div id="userFormMsg" class="login-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/app.js"></script>
+    <script src="../js/usuarios.js"></script>
+</body>
+</html>

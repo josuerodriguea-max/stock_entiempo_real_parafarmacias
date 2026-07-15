@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmaStock | Reportes</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="sidebar-icon">⚕️</span>
+                <span>FarmaStock</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span class="icon">🏠</span><span>Inicio</span></a>
+                <a href="medicamentos.html" class="nav-item"><span class="icon">💊</span><span>Medicamentos</span></a>
+                <a href="ventas.html" class="nav-item"><span class="icon">🛒</span><span>Ventas</span></a>
+                <a href="compras.html" class="nav-item"><span class="icon">📥</span><span>Compras</span></a>
+                <a href="inventario.html" class="nav-item"><span class="icon">📦</span><span>Inventario</span></a>
+                <a href="usuarios.html" class="nav-item"><span class="icon">👥</span><span>Usuarios</span></a>
+                <a href="reportes.html" class="nav-item active"><span class="icon">📊</span><span>Reportes</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="themeToggle" class="btn-theme">🌙 Modo oscuro</button>
+                <button id="logoutBtn" class="btn-logout">Cerrar sesión</button>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="topbar">
+                <div class="search-box">
+                    <input id="reportSearch" type="search" placeholder="Buscar reporte...">
+                </div>
+                <div class="topbar-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">FS</div>
+                        <div class="user-info">
+                            <div style="display:flex;align-items:center;gap:0.6rem;">
+                                <strong id="userName">Usuario</strong>
+                                <div id="userClock" class="clock" aria-live="polite">--:--:--</div>
+                            </div>
+                            <small id="userRole">Rol</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="dashboard-content">
+                <div class="actions-bar">
+                    <select id="reportType">
+                        <option value="ventas">Reporte de Ventas</option>
+                        <option value="compras">Reporte de Compras</option>
+                        <option value="inventario">Reporte de Inventario</option>
+                        <option value="medicamentos">Reporte de Medicamentos</option>
+                        <option value="clientes">Reporte de Clientes</option>
+                        <option value="proveedores">Reporte de Proveedores</option>
+                        <option value="usuarios">Reporte de Usuarios</option>
+                        <option value="ganancias">Reporte de Ganancias</option>
+                        <option value="agotados">Reporte de Productos Agotados</option>
+                        <option value="bajo">Reporte de Stock Bajo</option>
+                        <option value="vencer">Reporte de Medicamentos Próximos a Vencer</option>
+                        <option value="vencidos">Reporte de Medicamentos Vencidos</option>
+                        <option value="movimientos">Reporte de Movimientos de Inventario</option>
+                    </select>
+                    <input id="startDate" type="date">
+                    <input id="endDate" type="date">
+                    <button id="btnGenerate" class="btn-action btn-primary">Generar</button>
+                    <button id="btnExportCsv" class="btn-action">Exportar CSV</button>
+                    <button id="btnPrint" class="btn-action">Imprimir</button>
+                </div>
+
+                <div class="table-panel">
+                    <div class="table-header">
+                        <h2 id="reportTitle">Reporte de Ventas</h2>
+                        <span id="reportSummary">Resumen</span>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead id="reportThead"></thead>
+                            <tbody id="reportBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/app.js"></script>
+    <script src="../js/reportes.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmaStock | Compras</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="sidebar-icon">⚕️</span>
+                <span>FarmaStock</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span class="icon">🏠</span><span>Inicio</span></a>
+                <a href="medicamentos.html" class="nav-item"><span class="icon">💊</span><span>Medicamentos</span></a>
+                <a href="ventas.html" class="nav-item"><span class="icon">🛒</span><span>Ventas</span></a>
+                <a href="compras.html" class="nav-item active"><span class="icon">📥</span><span>Compras</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="themeToggle" class="btn-theme">🌙 Modo oscuro</button>
+                <button id="logoutBtn" class="btn-logout">Cerrar sesión</button>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="topbar">
+                <div class="search-box">
+                    <input id="purchaseSearch" type="search" placeholder="Buscar compra, proveedor, usuario o estado...">
+                </div>
+                <div class="topbar-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">FS</div>
+                        <div class="user-info">
+                            <div style="display:flex;align-items:center;gap:0.6rem;">
+                                <strong id="userName">Usuario</strong>
+                                <div id="userClock" class="clock" aria-live="polite">--:--:--</div>
+                            </div>
+                            <small id="userRole">Rol</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="dashboard-content">
+                <div class="actions-bar">
+                    <button id="btnNewPurchase" class="btn-action btn-primary">➕ Nueva Compra</button>
+                    <button id="btnAnularPurchase" class="btn-action">Anular Compra</button>
+                    <button id="btnPrintPurchase" class="btn-action">Imprimir</button>
+                    <button id="btnExportPurchase" class="btn-action">Exportar CSV</button>
+                </div>
+
+                <div class="table-panel">
+                    <div class="table-header">
+                        <h2>Gestión de Compras</h2>
+                        <span>Registrar, consultar y anular compras</span>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Proveedor</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="purchasesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="purchaseFormContainer" class="modal" style="display:none;">
+                    <div class="modal-content" style="max-width: 980px;">
+                        <h3>Nueva Compra</h3>
+                        <form id="purchaseForm">
+                            <div class="form-row">
+                                <label>Número de Compra</label><input id="purchaseNumber" readonly>
+                                <label>Fecha</label><input id="purchaseDate" readonly>
+                                <label>Hora</label><input id="purchaseTime" readonly>
+                            </div>
+                            <div class="form-row">
+                                <label>Proveedor</label><input id="purchaseProvider" placeholder="RUC / nombre / teléfono">
+                                <label>Usuario</label><input id="purchaseUser" readonly>
+                            </div>
+                            <div class="form-row">
+                                <label>Buscar Medicamento</label><input id="purchaseMedSearch" placeholder="Código, nombre, laboratorio, categoría...">
+                            </div>
+                            <div id="purchaseMedResults" class="table-wrapper"></div>
+                            <div class="table-wrapper">
+                                <table class="data-table">
+                                    <thead><tr><th>Código</th><th>Nombre</th><th>Cantidad</th><th>Precio Compra</th><th>Subtotal</th><th>Vencimiento</th><th>Lote</th><th>Acción</th></tr></thead>
+                                    <tbody id="purchaseCartBody"></tbody>
+                                </table>
+                            </div>
+                            <div class="form-row">
+                                <label>Subtotal</label><input id="purchaseSubtotal" readonly>
+                                <label>IGV</label><input id="purchaseIgv" readonly>
+                                <label>Total</label><input id="purchaseTotal" readonly>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit">Guardar Compra</button>
+                                <button type="button" id="cancelPurchaseBtn">Cancelar</button>
+                            </div>
+                            <div id="purchaseFormMsg" class="login-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/app.js"></script>
+    <script src="../js/compras.js"></script>
+</body>
+</html>

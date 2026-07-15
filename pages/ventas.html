@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmaStock | Ventas</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="sidebar-icon">⚕️</span>
+                <span>FarmaStock</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span class="icon">🏠</span><span>Inicio</span></a>
+                <a href="medicamentos.html" class="nav-item"><span class="icon">💊</span><span>Medicamentos</span></a>
+                <a href="ventas.html" class="nav-item active"><span class="icon">🛒</span><span>Ventas</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="themeToggle" class="btn-theme">🌙 Modo oscuro</button>
+                <button id="logoutBtn" class="btn-logout">Cerrar sesión</button>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="topbar">
+                <div class="search-box">
+                    <input id="saleSearch" type="search" placeholder="Buscar venta, cliente, fecha o estado...">
+                </div>
+                <div class="topbar-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">FS</div>
+                        <div class="user-info">
+                            <div style="display:flex;align-items:center;gap:0.6rem;">
+                                <strong id="userName">Usuario</strong>
+                                <div id="userClock" class="clock" aria-live="polite">--:--:--</div>
+                            </div>
+                            <small id="userRole">Rol</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="dashboard-content">
+                <div class="actions-bar">
+                    <button id="btnNewSale" class="btn-action btn-primary">➕ Nueva Venta</button>
+                    <button id="btnAnularVenta" class="btn-action">Anular Venta</button>
+                    <button id="btnImprimir" class="btn-action">Imprimir</button>
+                    <button id="btnExportExcel" class="btn-action">Exportar Excel</button>
+                </div>
+
+                <div class="table-panel">
+                    <div class="table-header">
+                        <h2>Gestión de Ventas</h2>
+                        <span>Registrar, consultar y anular ventas</span>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Cliente</th>
+                                    <th>Farmacéutico</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="salesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="saleFormContainer" class="modal" style="display:none;">
+                    <div class="modal-content" style="max-width: 900px;">
+                        <h3 id="saleFormTitle">Nueva Venta</h3>
+                        <form id="saleForm">
+                            <div class="form-row">
+                                <label>Número de Venta</label><input id="saleNumber" readonly>
+                                <label>Fecha</label><input id="saleDate" readonly>
+                                <label>Hora</label><input id="saleTime" readonly>
+                            </div>
+                            <div class="form-row">
+                                <label>Cliente</label><input id="saleClientName" placeholder="DNI / nombre / teléfono">
+                                <label>Método de Pago</label>
+                                <select id="salePaymentMethod">
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Tarjeta">Tarjeta</option>
+                                    <option value="Yape">Yape</option>
+                                    <option value="Plin">Plin</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <label>Buscar Medicamento</label><input id="medSearchInput" placeholder="Código, nombre, laboratorio, categoría...">
+                            </div>
+                            <div id="medSearchResults" class="table-wrapper"></div>
+                            <div class="table-wrapper">
+                                <table class="data-table">
+                                    <thead><tr><th>Código</th><th>Nombre</th><th>Cantidad</th><th>Precio</th><th>Descuento</th><th>Subtotal</th><th>Acción</th></tr></thead>
+                                    <tbody id="saleCartBody"></tbody>
+                                </table>
+                            </div>
+                            <div class="form-row">
+                                <label>Subtotal</label><input id="saleSubtotal" readonly>
+                                <label>Descuento</label><input id="saleDiscount" value="0" readonly>
+                                <label>IGV</label><input id="saleIgv" readonly>
+                                <label>Total</label><input id="saleTotal" readonly>
+                            </div>
+                            <div class="form-row">
+                                <label>Monto Recibido</label><input id="saleReceived" type="number" step="0.01">
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit">Finalizar Venta</button>
+                                <button type="button" id="cancelSaleBtn">Cancelar</button>
+                            </div>
+                            <div id="saleFormMsg" class="login-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/ventas.js"></script>
+</body>
+</html>
